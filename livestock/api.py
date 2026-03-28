@@ -5,7 +5,7 @@ import qrcode
 from django.conf import settings
 from django.db.models import Count
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from ninja import Router
 
 from accounts.api import AuthBearer
@@ -108,7 +108,7 @@ def generate_qrcode(request, livestock_id: UUID):
     return response
 
 
-@router.get("/public/{tag_id}", response=LivestockPublicSchema)
+@router.get("/public/{tag_id}")
 def get_public_livestock(request, tag_id: str):
     """Get public details of a livestock animal via QR code scan"""
     livestock = get_object_or_404(Livestock, tag_id=tag_id)
@@ -135,7 +135,7 @@ def get_public_livestock(request, tag_id: str):
     # Owner farm name
     owner_farm = livestock.owner.farm_name if livestock.owner and livestock.owner.farm_name else "Unknown Farm"
 
-    return {
+    context = {
         "tag_id": livestock.tag_id,
         "name": livestock.name,
         "animal_type": livestock.animal_type,
@@ -149,3 +149,4 @@ def get_public_livestock(request, tag_id: str):
         "health_records": health_records,
         "vaccinations": vaccinations,
     }
+    return render(request, "livestock/public_profile.html", context)
