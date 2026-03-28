@@ -135,3 +135,6 @@ AUTH_USER_MODEL = "accounts.User"
 
 # CORS Settings
 CORS_ALLOW_ALL_ORIGINS = True
+
+# QR Code Settings
+QR_CODE_BASE_URL = config("QR_CODE_BASE_URL", default="http://localhost:8000")

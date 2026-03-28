@@ -1,9 +1,11 @@
 from django.conf import settings
 from django.db import models
+import uuid
 
 
 class Livestock(models.Model):
     """Model for individual livestock animals"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     ANIMAL_TYPES = [
         ("cattle", "Cattle"),

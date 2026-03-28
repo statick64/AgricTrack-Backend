@@ -1,12 +1,13 @@
 from datetime import date, datetime
 from typing import Optional
+from uuid import UUID
 
 from ninja import Schema
 
 
 class HealthRecordSchema(Schema):
     id: int
-    animal_id: int
+    animal_id: UUID
     date: date
     condition: str
     treatment: str
@@ -19,7 +20,7 @@ class HealthRecordSchema(Schema):
 
 
 class HealthRecordCreateSchema(Schema):
-    animal_id: int
+    animal_id: UUID
     date: date
     condition: str
     treatment: str
@@ -31,7 +32,7 @@ class HealthRecordCreateSchema(Schema):
 
 class VaccinationSchema(Schema):
     id: int
-    animal_id: Optional[int]
+    animal_id: Optional[UUID]
     group_name: Optional[str]
     vaccine_name: str
     scheduled_date: date
@@ -45,7 +46,7 @@ class VaccinationSchema(Schema):
 
 
 class VaccinationCreateSchema(Schema):
-    animal_id: Optional[int] = None
+    animal_id: Optional[UUID] = None
     group_name: Optional[str] = ""
     vaccine_name: str
     scheduled_date: date
