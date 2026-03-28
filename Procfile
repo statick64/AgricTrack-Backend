@@ -1,0 +1,1 @@
+web: gunicorn agrictrack_backend.wsgi
