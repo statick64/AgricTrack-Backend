@@ -21,6 +21,12 @@ def list_resources(request, category: Optional[str] = None):
     return queryset
 
 
+@router.get("/featured", response=List[TrainingResourceSchema], auth=AuthBearer())
+def get_featured_resources(request):
+    """Get featured training resources"""
+    return TrainingResource.objects.filter(is_featured=True)
+
+
 @router.get("/{resource_id}", response=TrainingResourceSchema, auth=AuthBearer())
 def get_resource(request, resource_id: int):
     """Get single training resource"""
