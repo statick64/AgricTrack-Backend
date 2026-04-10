@@ -134,7 +134,12 @@ MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "accounts.User"
 
 # CORS Settings
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://agric-track-frontend.vercel.app/",  # TODO: Replace with your actual Vercel domain
+]
+CORS_ALLOW_CREDENTIALS = True
 
 # QR Code Settings
 QR_CODE_BASE_URL = config("QR_CODE_BASE_URL", default="http://localhost:8000")
