@@ -137,9 +137,20 @@ AUTH_USER_MODEL = "accounts.User"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    "https://agric-track-frontend.vercel.app",  # TODO: Replace with your actual Vercel domain
+    "https://agric-track-frontend.vercel.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+# Explicitly allow common headers used in API requests
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "origin",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
 
 # QR Code Settings
 QR_CODE_BASE_URL = config("QR_CODE_BASE_URL", default="http://localhost:8000")
