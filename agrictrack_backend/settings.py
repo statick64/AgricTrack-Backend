@@ -137,7 +137,7 @@ AUTH_USER_MODEL = "accounts.User"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    "https://agric-track-frontend.vercel.app/",  # TODO: Replace with your actual Vercel domain
+    "https://agric-track-frontend.vercel.app",  # TODO: Replace with your actual Vercel domain
 ]
 CORS_ALLOW_CREDENTIALS = True
 
