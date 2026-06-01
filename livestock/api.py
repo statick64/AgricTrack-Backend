@@ -57,7 +57,7 @@ def list_livestock(request, animal_type: Optional[str] = None):
 @router.get("/{livestock_id}", response=LivestockSchema, auth=AuthBearer())
 def get_livestock(request, livestock_id: UUID):
     """Get single livestock by ID"""
-    return Livestock.objects.get(id=livestock_id, owner=request.auth)
+    return get_object_or_404(Livestock, id=livestock_id, owner=request.auth)
 
 
 @router.post("/", response={201: LivestockSchema}, auth=AuthBearer())
@@ -70,7 +70,7 @@ def create_livestock(request, data: LivestockCreateSchema):
 @router.put("/{livestock_id}", response=LivestockSchema, auth=AuthBearer())
 def update_livestock(request, livestock_id: UUID, data: LivestockUpdateSchema):
     """Update livestock"""
-    livestock = Livestock.objects.get(id=livestock_id, owner=request.auth)
+    livestock = get_object_or_404(Livestock, id=livestock_id, owner=request.auth)
 
     for attr, value in data.dict(exclude_unset=True).items():
         setattr(livestock, attr, value)
@@ -82,7 +82,7 @@ def update_livestock(request, livestock_id: UUID, data: LivestockUpdateSchema):
 @router.delete("/{livestock_id}", response={204: None}, auth=AuthBearer())
 def delete_livestock(request, livestock_id: UUID):
     """Delete livestock"""
-    livestock = Livestock.objects.get(id=livestock_id, owner=request.auth)
+    livestock = get_object_or_404(Livestock, id=livestock_id, owner=request.auth)
     livestock.delete()
     return 204, None
 
